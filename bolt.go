@@ -31,7 +31,7 @@ func (this *Bolt) InitReader(pull string) (err error) {
 		return
 	}
 
-	err = this.Component.ReadSocket.Connect("ipc://" + pull)
+	err = this.Component.ReadSocket.Connect("tcp://" + pull)
 	return
 }
 
@@ -46,6 +46,6 @@ func (this *Bolt) InitWriter(push string) (err error) {
 		return
 	}
 
-	err = this.Component.WriteSocket.Bind("ipc://" + push)
+	err = this.Component.WriteSocket.Bind("tcp://" + push)
 	return
 }
