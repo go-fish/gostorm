@@ -27,7 +27,6 @@ var _ = math.Inf
 
 type Init struct {
 	PidDir           *string `protobuf:"bytes,1,req" json:"PidDir,omitempty"`
-	HashCode         *int64  `protobuf:"varint,2,req" json:"HashCode,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -40,13 +39,6 @@ func (m *Init) GetPidDir() string {
 		return *m.PidDir
 	}
 	return ""
-}
-
-func (m *Init) GetHashCode() int64 {
-	if m != nil && m.HashCode != nil {
-		return *m.HashCode
-	}
-	return 0
 }
 
 type Command struct {
