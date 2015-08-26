@@ -46,6 +46,6 @@ func (this *Spout) InitWriter(push string) (err error) {
 		return
 	}
 
-	err = this.Component.WriteSocket.Connect("ipc://" + push)
+	err = this.Component.WriteSocket.Bind("ipc://" + push)
 	return
 }
