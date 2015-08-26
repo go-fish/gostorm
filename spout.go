@@ -11,7 +11,7 @@ type Spout struct {
 func NewSpout(pair string) (spout *Spout, err error) {
 	spout = &Spout{}
 
-	err = spout.InitSocket(push)
+	err = spout.InitSocket(pair)
 	return
 }
 

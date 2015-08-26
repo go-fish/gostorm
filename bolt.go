@@ -11,7 +11,7 @@ type Bolt struct {
 func NewBolt(pair string) (bolt *Bolt, err error) {
 	bolt = &Bolt{}
 
-	err = bolt.InitSocket(push)
+	err = bolt.InitSocket(pair)
 	return
 }
 
