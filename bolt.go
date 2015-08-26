@@ -8,24 +8,34 @@ type Bolt struct {
 	Component
 }
 
-func NewBolt(pair string) (bolt *Bolt, err error) {
+func NewBolt(pull, push string) (bolt *Bolt, err error) {
 	bolt = &Bolt{}
 
-	err = bolt.InitSocket(pair)
+	err = bolt.InitSocket(pull, push)
 	return
 }
 
-func (this *Bolt) InitSocket(pair string) (err error) {
+func (this *Bolt) InitSocket(pull, push string) (err error) {
 	this.Component.Context, err = zmq.NewContext()
 	if err != nil {
 		return
 	}
 
-	this.Component.Socket, err = this.Component.Context.NewSocket(zmq.PAIR)
+	this.Component.Reader, err = this.Component.Context.NewSocket(zmq.PULL)
 	if err != nil {
 		return
 	}
 
-	err = this.Component.Socket.Connect("tcp://" + pair)
+	err = this.Component.Reader.Connect("tcp://" + pull)
+	if err != nil {
+		return
+	}
+
+	this.Component.Writer, err = this.Component.Context.NewSocket(zmq.PUSH)
+	if err != nil {
+		return
+	}
+
+	err = this.Component.Writer.Bind("tcp://" + push)
 	return
 }

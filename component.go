@@ -11,7 +11,8 @@ import (
 
 type Component struct {
 	Context *zmq.Context
-	Socket  *zmq.Socket
+	Reader  *zmq.Socket
+	Writer  *zmq.Socket
 }
 
 func (this *Component) Ack(id string) (err error) {
@@ -173,10 +174,10 @@ func (this *Component) Handshake() (err error) {
 }
 
 func (this *Component) readMsg() ([]byte, error) {
-	return this.Socket.RecvBytes(0)
+	return this.Reader.RecvBytes(0)
 }
 
 func (this *Component) sendMsg(info []byte) (err error) {
-	_, err = this.Socket.SendBytes(info, zmq.DONTWAIT)
+	_, err = this.Writer.SendBytes(info, zmq.DONTWAIT)
 	return
 }
