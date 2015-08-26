@@ -26,6 +26,6 @@ func (this *Spout) InitSocket(pair string) (err error) {
 		return
 	}
 
-	err = this.Component.Socket.Bind("tcp://" + pair)
+	err = this.Component.Socket.Connect("tcp://" + pair)
 	return
 }
