@@ -173,7 +173,7 @@ func (this *Component) Handshake() (err error) {
 }
 
 func (this *Component) readMsg() ([]byte, error) {
-	return this.ReadSocket.RecvBytes(zmq.DONTWAIT)
+	return this.ReadSocket.RecvBytes(0)
 }
 
 func (this *Component) sendMsg(info []byte) (err error) {
