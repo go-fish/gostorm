@@ -8,44 +8,24 @@ type Spout struct {
 	Component
 }
 
-func NewSpout(pull, push string) (spout *Spout, err error) {
+func NewSpout(pair string) (spout *Spout, err error) {
 	spout = &Spout{}
 
-	err = spout.InitReader(pull)
-	if err != nil {
-		return
-	}
-
-	err = spout.InitWriter(push)
+	err = spout.InitSocket(push)
 	return
 }
 
-func (this *Spout) InitReader(pull string) (err error) {
-	this.Component.ReadContext, err = zmq.NewContext()
+func (this *Spout) InitSocket(pair string) (err error) {
+	this.Component.Context, err = zmq.NewContext()
 	if err != nil {
 		return
 	}
 
-	this.Component.ReadSocket, err = this.Component.ReadContext.NewSocket(zmq.PULL)
+	this.Component.Socket, err = this.Component.Context.NewSocket(zmq.PAIR)
 	if err != nil {
 		return
 	}
 
-	err = this.Component.ReadSocket.Connect("tcp://" + pull)
-	return
-}
-
-func (this *Spout) InitWriter(push string) (err error) {
-	this.Component.WriteContext, err = zmq.NewContext()
-	if err != nil {
-		return
-	}
-
-	this.Component.WriteSocket, err = this.Component.WriteContext.NewSocket(zmq.PULL)
-	if err != nil {
-		return
-	}
-
-	err = this.Component.WriteSocket.Bind("tcp://" + push)
+	err = this.Component.Socket.Connect("tcp://" + pair)
 	return
 }
