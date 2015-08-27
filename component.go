@@ -180,18 +180,3 @@ func (this *Component) sendMsg(info []byte) (err error) {
 	_, err = this.Writer.SendBytes(info, 0)
 	return
 }
-
-func bytesToInt(bytes []byte) (num int, err error) {
-	for _, v := range bytes {
-		num *= 10
-		if v < '0' || v > '9' {
-			err = fmt.Errorf("illegal bytes in int")
-			num = -1
-			return
-		}
-
-		num += int(v - '0')
-	}
-
-	return
-}

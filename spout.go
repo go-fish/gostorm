@@ -24,10 +24,8 @@ func NewSpout() (spout *Spout, err error) {
 	}
 
 	var index = bytes.IndexByte(info, '\t')
-	var pull = bytesToInt(info[0:index])
-	var push = bytesToInt(info[index+1:])
 
-	err = spout.InitSocket(pull, push)
+	err = spout.InitSocket(string(info[0:index]), string(info[index+1:]))
 	return
 }
 
