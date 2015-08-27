@@ -15,7 +15,7 @@ type Component struct {
 }
 
 func (this *Component) Ack(id string) (err error) {
-	var ack = &Command{
+	var ack = &ShellMsg{
 		Command: proto.String("ack"),
 		Id:      proto.String(id),
 	}
@@ -30,7 +30,7 @@ func (this *Component) Ack(id string) (err error) {
 }
 
 func (this *Component) Fail(id string) (err error) {
-	var fail = &Command{
+	var fail = &ShellMsg{
 		Command: proto.String("fail"),
 		Id:      proto.String(id),
 	}
@@ -45,7 +45,7 @@ func (this *Component) Fail(id string) (err error) {
 }
 
 func (this *Component) Log(msg string) (err error) {
-	var log = &Command{
+	var log = &ShellMsg{
 		Command: proto.String("log"),
 		Msg:     proto.String(msg),
 	}
@@ -74,8 +74,8 @@ func (this *Component) Sync() (err error) {
 }
 
 func (this *Component) SpoutEmit(msg []string, options map[string]string) (err error) {
-	var emit = &SpoutEmit{
-		Command: proto.String("emit"),
+	var emit = &ShellMsg{
+		Command: "emit",
 		Tuple:   msg,
 	}
 
@@ -104,7 +104,7 @@ func (this *Component) SpoutEmit(msg []string, options map[string]string) (err e
 }
 
 func (this *Component) BoltEmit(msg, anchors []string, options map[string]string) (err error) {
-	var emit = &BoltEmit{
+	var emit = &ShellMsg{
 		Command: proto.String("emit"),
 		Anchors: anchors,
 		Tuple:   msg,
