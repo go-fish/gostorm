@@ -177,6 +177,6 @@ func (this *Component) readMsg() ([]byte, error) {
 }
 
 func (this *Component) sendMsg(info []byte) (err error) {
-	_, err = this.Writer.SendBytes(info, zmq.DONTWAIT)
+	_, err = this.Writer.SendBytes(info, 0)
 	return
 }
