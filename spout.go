@@ -28,7 +28,7 @@ func NewSpout(logger *log.Logger) (spout *Spout, err error) {
 		return
 	}
 
-	logger.Println("get port: ", pull, push)
+	logger.Println("get port: ", string(pull), string(push))
 
 	err = spout.InitSocket(string(pull), string(push))
 	return
