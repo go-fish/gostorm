@@ -2,7 +2,6 @@ package gostorm
 
 import (
 	"bufio"
-	"bytes"
 	"os"
 
 	zmq "github.com/pebbe/zmq4"
@@ -16,15 +15,19 @@ func NewBolt() (bolt *Bolt, err error) {
 	bolt = &Bolt{}
 
 	var reader = bufio.NewReader(os.Stdin)
-	var info []byte
+	var pull, push []byte
 
-	info, _, err = reader.ReadLine()
+	pull, err = reader.ReadBytes('|')
 	if err != nil {
 		return
 	}
 
-	var index = bytes.IndexByte(info, '|')
-	err = bolt.InitSocket(string(info[0:index]), string(info[index+1:]))
+	push, _, err = reader.ReadLine()
+	if err != nil {
+		return
+	}
+
+	err = spout.InitSocket(string(pull), string(push))
 	return
 }
 
