@@ -17,7 +17,6 @@ func NewSpout(pull, push string) (spout *Spout, err error) {
 
 	var reader = bufio.NewReader(os.Stdin)
 	var info []byte
-	var err error
 
 	info, _, err = reader.ReadLine()
 	if err != nil {
