@@ -24,7 +24,7 @@ func NewBolt() (bolt *Bolt, err error) {
 	}
 
 	var index = bytes.IndexByte(info, '\t')
-	err = spout.InitSocket(string(info[0:index]), string(info[index+1:]))
+	err = bolt.InitSocket(string(info[0:index]), string(info[index+1:]))
 	return
 }
 
