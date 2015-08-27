@@ -25,6 +25,8 @@ func NewSpout() (spout *Spout, err error) {
 	}
 
 	var index = bytes.IndexByte(info, '|')
+
+	return nil, fmt.Errorf("%s - %d", string(info), index)
 	err = spout.InitSocket(string(info[0:index]), string(info[index+1:]))
 	return
 }
