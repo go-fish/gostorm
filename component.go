@@ -60,7 +60,7 @@ func (this *Component) Log(msg string) (err error) {
 }
 
 func (this *Component) Sync() (err error) {
-	var sync = &Command{
+	var sync = &ShellMsg{
 		Command: proto.String("sync"),
 	}
 
