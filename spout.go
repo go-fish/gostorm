@@ -30,7 +30,7 @@ func NewSpout(logger *log.Logger) (spout *Spout, err error) {
 
 	logger.Println("get port: ", string(pull), string(push))
 
-	err = spout.InitSocket(string(pull), string(push))
+	err = spout.InitSocket(string(pull[:len(pull)-1]), string(push))
 	return
 }
 
@@ -61,6 +61,6 @@ func (this *Spout) InitSocket(pull, push string) (err error) {
 		return
 	}
 
-	err = this.Component.Writer.Bind("ipc://127.0.0.1:" + push)
+	err = this.Component.Writer.Bind("tcp://127.0.0.1:" + push)
 	return
 }

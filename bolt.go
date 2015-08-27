@@ -27,7 +27,7 @@ func NewBolt() (bolt *Bolt, err error) {
 		return
 	}
 
-	err = bolt.InitSocket(string(pull), string(push))
+	err = bolt.InitSocket(string(pull[:len(pull)-1]), string(push))
 	return
 }
 
