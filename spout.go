@@ -2,7 +2,7 @@ package gostorm
 
 import (
 	"bufio"
-	"fmt"
+	"log"
 	"os"
 
 	zmq "github.com/pebbe/zmq4"
@@ -12,7 +12,7 @@ type Spout struct {
 	Component
 }
 
-func NewSpout() (spout *Spout, err error) {
+func NewSpout(logger *log.Logger) (spout *Spout, err error) {
 	spout = &Spout{}
 
 	var reader = bufio.NewReader(os.Stdin)
@@ -28,7 +28,8 @@ func NewSpout() (spout *Spout, err error) {
 		return
 	}
 
-	panic(fmt.Sprintf("%d - %d", pull, push))
+	logger.Println("get port: ", pull, push)
+
 	err = spout.InitSocket(string(pull), string(push))
 	return
 }
