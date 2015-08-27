@@ -75,7 +75,7 @@ func (this *Component) Sync() (err error) {
 
 func (this *Component) SpoutEmit(msg []string, options map[string]string) (err error) {
 	var emit = &ShellMsg{
-		Command: "emit",
+		Command: proto.String("emit"),
 		Tuple:   msg,
 	}
 
