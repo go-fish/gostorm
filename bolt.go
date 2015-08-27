@@ -27,7 +27,7 @@ func NewBolt() (bolt *Bolt, err error) {
 		return
 	}
 
-	err = spout.InitSocket(string(pull), string(push))
+	err = bolt.InitSocket(string(pull), string(push))
 	return
 }
 
