@@ -17,17 +17,19 @@ func NewSpout() (spout *Spout, err error) {
 	spout = &Spout{}
 
 	var reader = bufio.NewReader(os.Stdin)
-	var info []byte
+	var pull, push []byte
 
-	info, _, err = reader.ReadLine()
+	pull, err = reader.ReadBytes('|')
 	if err != nil {
-		return nil, fmt.Errorf("1 %s", err)
+		return
 	}
 
-	var index = bytes.IndexByte(info, '|')
+	push, _, err = reader.ReadLine()
+	if err != nil {
+		return
+	}
 
-	return nil, fmt.Errorf("%s - %d", string(info), index)
-	err = spout.InitSocket(string(info[0:index]), string(info[index+1:]))
+	err = spout.InitSocket(string(pull), string(push))
 	return
 }
 
