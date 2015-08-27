@@ -2,6 +2,7 @@ package gostorm
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 
 	zmq "github.com/pebbe/zmq4"
@@ -27,7 +28,7 @@ func NewSpout() (spout *Spout, err error) {
 		return
 	}
 
-	panic(pull, push)
+	panic(fmt.Sprintf("%d - %d", pull, push))
 	err = spout.InitSocket(string(pull), string(push))
 	return
 }
