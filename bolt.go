@@ -12,7 +12,7 @@ type Bolt struct {
 	Component
 }
 
-func NewBolt(pull, push string) (bolt *Bolt, err error) {
+func NewBolt() (bolt *Bolt, err error) {
 	bolt = &Bolt{}
 
 	var reader = bufio.NewReader(os.Stdin)

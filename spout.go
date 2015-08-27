@@ -12,7 +12,7 @@ type Spout struct {
 	Component
 }
 
-func NewSpout(pull, push string) (spout *Spout, err error) {
+func NewSpout() (spout *Spout, err error) {
 	spout = &Spout{}
 
 	var reader = bufio.NewReader(os.Stdin)
