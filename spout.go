@@ -43,7 +43,7 @@ func (this *Spout) InitSocket(pull, push string) (err error) {
 		return
 	}
 
-	err = this.Component.Reader.Connect("ipc://" + pull)
+	err = this.Component.Reader.Connect("tcp://127.0.0.1:" + pull)
 	if err != nil {
 		return
 	}
@@ -58,6 +58,6 @@ func (this *Spout) InitSocket(pull, push string) (err error) {
 		return
 	}
 
-	err = this.Component.Writer.Bind("ipc://" + push)
+	err = this.Component.Writer.Bind("ipc://127.0.0.1:" + push)
 	return
 }
