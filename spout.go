@@ -3,6 +3,7 @@ package gostorm
 import (
 	"bufio"
 	"bytes"
+	"fmt"
 	"os"
 
 	zmq "github.com/pebbe/zmq4"
@@ -20,11 +21,10 @@ func NewSpout() (spout *Spout, err error) {
 
 	info, _, err = reader.ReadLine()
 	if err != nil {
-		return
+		return nil, fmt.Errorf("1 %s", err)
 	}
 
-	var index = bytes.IndexByte(info, '\t')
-
+	var index = bytes.IndexByte(info, '|')
 	err = spout.InitSocket(string(info[0:index]), string(info[index+1:]))
 	return
 }

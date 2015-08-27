@@ -23,7 +23,7 @@ func NewBolt() (bolt *Bolt, err error) {
 		return
 	}
 
-	var index = bytes.IndexByte(info, '\t')
+	var index = bytes.IndexByte(info, '|')
 	err = bolt.InitSocket(string(info[0:index]), string(info[index+1:]))
 	return
 }
