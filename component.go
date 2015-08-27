@@ -10,9 +10,8 @@ import (
 )
 
 type Component struct {
-	Context *zmq.Context
-	Reader  *zmq.Socket
-	Writer  *zmq.Socket
+	Reader *zmq.Socket
+	Writer *zmq.Socket
 }
 
 func (this *Component) Ack(id string) (err error) {

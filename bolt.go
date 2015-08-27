@@ -16,12 +16,13 @@ func NewBolt(pull, push string) (bolt *Bolt, err error) {
 }
 
 func (this *Bolt) InitSocket(pull, push string) (err error) {
-	this.Component.Context, err = zmq.NewContext()
+	var reader, writer *zmq.Context
+	reader, err = zmq.NewContext()
 	if err != nil {
 		return
 	}
 
-	this.Component.Reader, err = this.Component.Context.NewSocket(zmq.PULL)
+	this.Component.Reader, err = reader.NewSocket(zmq.PULL)
 	if err != nil {
 		return
 	}
@@ -31,7 +32,12 @@ func (this *Bolt) InitSocket(pull, push string) (err error) {
 		return
 	}
 
-	this.Component.Writer, err = this.Component.Context.NewSocket(zmq.PUSH)
+	writer, err = zmq.NewContext()
+	if err != nil {
+		return
+	}
+
+	this.Component.Writer, err = writer.NewSocket(zmq.PUSH)
 	if err != nil {
 		return
 	}
