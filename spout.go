@@ -27,6 +27,7 @@ func NewSpout() (spout *Spout, err error) {
 		return
 	}
 
+	panic(pull, push)
 	err = spout.InitSocket(string(pull), string(push))
 	return
 }
