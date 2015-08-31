@@ -12,7 +12,7 @@ type Spout struct {
 	Component
 }
 
-func NewSpout(logger *log.Logger) (spout *Spout, err error) {
+func NewSpout() (spout *Spout, err error) {
 	spout = &Spout{}
 
 	var reader = bufio.NewReader(os.Stdin)
@@ -27,8 +27,6 @@ func NewSpout(logger *log.Logger) (spout *Spout, err error) {
 	if err != nil {
 		return
 	}
-
-	logger.Println("get port: ", string(pull), string(push))
 
 	err = spout.InitSocket(string(pull[:len(pull)-1]), string(push))
 	return
