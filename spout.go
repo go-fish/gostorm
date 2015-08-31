@@ -2,7 +2,6 @@ package gostorm
 
 import (
 	"bufio"
-	"log"
 	"os"
 
 	zmq "github.com/pebbe/zmq4"
